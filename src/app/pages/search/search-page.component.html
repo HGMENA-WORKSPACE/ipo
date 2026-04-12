@@ -1,0 +1,104 @@
+<div class="min-h-screen bg-gray-50 pb-20 md:pb-0">
+  <header class="bg-white border-b sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-4 md:px-6 lg:px-8">
+      <div class="flex items-center gap-3 mb-4">
+        <a 
+          routerLink="/"
+          class="p-2 -ml-2 text-gray-600 hover:text-indigo-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+          aria-label="Volver"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </a>
+        <h1 class="text-lg md:text-xl font-semibold text-gray-900">
+          {{ 'search.results' | translate: { count: totalCount() } }}
+        </h1>
+      </div>
+      
+      <app-input
+        [placeholder]="'search.placeholder' | translate"
+        [voiceEnabled]="true"
+        [(ngModel)]="query"
+        (search)="onSearch($event)"
+      />
+    </div>
+  </header>
+
+  <div class="max-w-7xl mx-auto px-4 py-4 md:px-6 lg:px-8">
+    <div class="flex gap-2 mb-4 overflow-x-auto pb-2">
+      <button
+        (click)="setGenreFilter('')"
+        class="px-4 py-2 text-sm rounded-full whitespace-nowrap transition-colors min-h-[44px]"
+        [class]="filters().genre ? 'bg-gray-100 text-gray-700' : 'bg-indigo-600 text-white'"
+      >
+        {{ 'filters.all' | translate }}
+      </button>
+      <button
+        (click)="setGenreFilter('fiction')"
+        class="px-4 py-2 text-sm rounded-full whitespace-nowrap transition-colors min-h-[44px]"
+        [class]="filters().genre === 'fiction' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700'"
+      >
+        {{ 'genre.fiction' | translate }}
+      </button>
+      <button
+        (click)="setGenreFilter('fantasy')"
+        class="px-4 py-2 text-sm rounded-full whitespace-nowrap transition-colors min-h-[44px]"
+        [class]="filters().genre === 'fantasy' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700'"
+      >
+        {{ 'genre.fantasy' | translate }}
+      </button>
+      <button
+        (click)="setGenreFilter('mystery')"
+        class="px-4 py-2 text-sm rounded-full whitespace-nowrap transition-colors min-h-[44px]"
+        [class]="filters().genre === 'mystery' ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700'"
+      >
+        {{ 'genre.mystery' | translate }}
+      </button>
+    </div>
+
+    @if (loading()) {
+      <div class="flex items-center justify-center py-12">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+      </div>
+    } @else if (books().length === 0 && query) {
+      <div class="text-center py-12">
+        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <p class="text-gray-500">{{ 'search.noResults' | translate: { term: query } }}</p>
+      </div>
+    } @else {
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 md:gap-4">
+        @for (book of books(); track book.key) {
+          <app-card [book]="book" [link]="'/book/' + book.key" />
+        }
+      </div>
+
+      @if (hasMore()) {
+        <div class="text-center mt-6">
+          <button 
+            (click)="loadMore()"
+            class="px-6 py-3 text-indigo-600 hover:text-indigo-700 transition-colors min-h-[44px]"
+          >
+            {{ 'common.loading' | translate }}
+          </button>
+        </div>
+      }
+
+      @if (totalPages() > 1) {
+        <div class="flex justify-center gap-2 mt-6 flex-wrap">
+          @for (page of pageNumbers(); track page) {
+            <button
+              (click)="goToPage(page)"
+              class="w-10 h-10 rounded-full text-sm transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              [class]="currentPage() === page ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'"
+            >
+              {{ page }}
+            </button>
+          }
+        </div>
+      }
+    }
+  </div>
+</div>

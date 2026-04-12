@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Home",
+    "explore": "Explore",
+    "downloads": "My Downloads",
+    "profile": "Profile"
+  },
+  "search": {
+    "placeholder": "Search by title, author or genre",
+    "button": "Search",
+    "noResults": "We found nothing for \"{{term}}\". Try different words.",
+    "empty": "Please, type something",
+    "results": "{{count}} results",
+    "voiceSearching": "Listening...",
+    "voiceError": "Could not recognize voice. Try again."
+  },
+  "home": {
+    "recommended": "Recommended for you",
+    "popular": "Popular Audiobooks"
+  },
+  "book": {
+    "listen": "Listen",
+    "download": "Download",
+    "downloadMP3": "Download MP3",
+    "downloadOGG": "Download OGG",
+    "continue": "Continue from where you left off?",
+    "continueBtn": "Continue",
+    "startOver": "Start over",
+    "by": "by",
+    "genre": "Genre",
+    "language": "Language",
+    "narrator": "Narrator",
+    "duration": "Duration",
+    "description": "Description",
+    "moreByAuthor": "More books by the author"
+  },
+  "downloads": {
+    "inProgress": "In progress",
+    "completed": "Completed",
+    "pause": "Pause",
+    "resume": "Resume",
+    "cancel": "Cancel",
+    "open": "Open",
+    "delete": "Delete",
+    "confirmCancel": "Cancel download?",
+    "confirmCancelMessage": "{{title}} is {{progress}}% downloaded. Continue?",
+    "noDownloads": "No downloads yet",
+    "size": "{{size}} / {{total}}"
+  },
+  "help": {
+    "title": "Help",
+    "chat": "Chat with us"
+  },
+  "player": {
+    "play": "Play",
+    "pause": "Pause",
+    "speed": "Speed",
+    "mute": "Mute",
+    "unmute": "Unmute"
+  },
+  "filters": {
+    "genre": "Genre",
+    "language": "Language",
+    "duration": "Duration",
+    "all": "All"
+  },
+  "genre": {
+    "classic": "Classic",
+    "fantasy": "Fantasy",
+    "fiction": "Fiction",
+    "nonfiction": "Non-fiction",
+    "mystery": "Mystery",
+    "romance": "Romance",
+    "sciFi": "Science fiction",
+    "biography": "Biography",
+    "history": "History"
+  },
+  "duration": {
+    "short": "Under 2h",
+    "medium": "2-5h",
+    "long": "5-10h",
+    "veryLong": "Over 10h"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "back": "Back",
+    "close": "Close",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "explore": "Explorar",
+    "downloads": "Mis Descargas",
+    "profile": "Perfil"
+  },
+  "search": {
+    "placeholder": "Buscar por título, autor o género",
+    "button": "Buscar",
+    "noResults": "No encontramos nada para \"{{term}}\". Prueba con otras palabras.",
+    "empty": "Por favor, escribe algo",
+    "results": "{{count}} resultados",
+    "voiceSearching": "Escuchando...",
+    "voiceError": "No se pudo reconocer la voz. Intenta de nuevo."
+  },
+  "home": {
+    "recommended": "Recomendados para ti",
+    "popular": "Audiolibros Populares"
+  },
+  "book": {
+    "listen": "Escuchar",
+    "download": "Descargar",
+    "downloadMP3": "Descargar MP3",
+    "downloadOGG": "Descargar OGG",
+    "continue": "¿Continuar desde donde lo dejaste?",
+    "continueBtn": "Continuar",
+    "startOver": "Empezar de nuevo",
+    "by": "por",
+    "genre": "Género",
+    "language": "Idioma",
+    "narrator": "Narrador",
+    "duration": "Duración",
+    "description": "Descripción",
+    "moreByAuthor": "Más libros del autor"
+  },
+  "downloads": {
+    "inProgress": "En progreso",
+    "completed": "Completados",
+    "pause": "Pausar",
+    "resume": "Reanudar",
+    "cancel": "Cancelar",
+    "open": "Abrir",
+    "delete": "Eliminar",
+    "confirmCancel": "¿Cancelar descarga?",
+    "confirmCancelMessage": "{{title}} se descargó en un {{progress}}%. ¿Continuar?",
+    "noDownloads": "No hay descargas todavía",
+    "size": "{{size}} / {{total}}"
+  },
+  "help": {
+    "title": "Ayuda",
+    "chat": "Chatea con nosotros"
+  },
+  "player": {
+    "play": "Reproducir",
+    "pause": "Pausar",
+    "speed": "Velocidad",
+    "mute": "Silenciar",
+    "unmute": "Activar sonido"
+  },
+  "filters": {
+    "genre": "Género",
+    "language": "Idioma",
+    "duration": "Duración",
+    "all": "Todos"
+  },
+  "genre": {
+    "classic": "Clásica",
+    "fantasy": "Fantasía",
+    "fiction": "Ficción",
+    "nonfiction": "No ficción",
+    "mystery": "Misterio",
+    "romance": "Romance",
+    "sciFi": "Ciencia ficción",
+    "biography": "Biografía",
+    "history": "Historia"
+  },
+  "duration": {
+    "short": "Menos de 2h",
+    "medium": "2-5h",
+    "long": "5-10h",
+    "veryLong": "Más de 10h"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ha ocurrido un error",
+    "retry": "Reintentar",
+    "back": "Volver",
+    "close": "Cerrar",
+    "confirm": "Confirmar",
+    "cancel": "Cancelar"
+  }
+}

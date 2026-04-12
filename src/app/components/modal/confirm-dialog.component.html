@@ -1,0 +1,22 @@
+<app-modal
+  [isOpen]="isOpen()"
+  [title]="title()"
+  (close)="onClose()"
+>
+  <p class="text-gray-600 mb-6">{{ message() }}</p>
+  
+  <div class="flex gap-3">
+    <button
+      (click)="onCancel()"
+      class="flex-1 px-4 py-2 border-2 border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+    >
+      {{ cancelText() }}
+    </button>
+    <button
+      (click)="onConfirm()"
+      class="flex-1 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
+    >
+      {{ confirmText() }}
+    </button>
+  </div>
+</app-modal>

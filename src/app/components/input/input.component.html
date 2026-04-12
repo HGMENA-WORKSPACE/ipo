@@ -1,0 +1,34 @@
+<div class="relative">
+  <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+    </svg>
+  </div>
+  <input
+    [type]="type()"
+    [placeholder]="placeholder()"
+    [(ngModel)]="value"
+    (input)="onInput()"
+    (keydown.enter)="onEnter()"
+    [attr.aria-label]="placeholder()"
+    class="w-full h-12 md:h-14 pl-10 pr-10 text-base md:text-lg border-2 border-gray-200 rounded-lg bg-white text-gray-900 placeholder-gray-400 focus:border-indigo-500 focus:ring-0 disabled:bg-gray-50 disabled:cursor-not-allowed transition-colors duration-200"
+  />
+  @if (voiceEnabled()) {
+    <button
+      type="button"
+      class="absolute inset-y-0 right-0 pr-3 flex items-center p-2 rounded-full min-w-[44px] min-h-[44px] flex items-center justify-center transition-colors duration-200 text-gray-400 hover:text-gray-600"
+      [class.bg-red-50]="listening()"
+      [class.text-red-500]="listening()"
+      (click)="toggleVoice()"
+      [attr.aria-label]="listening() ? 'Detener búsqueda por voz' : 'Iniciar búsqueda por voz'"
+    >
+      <svg class="h-5 w-5" [class.animate-pulse]="listening()" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        @if (listening()) {
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+        } @else {
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+        }
+      </svg>
+    </button>
+  }
+</div>
