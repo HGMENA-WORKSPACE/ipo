@@ -5,11 +5,8 @@
       <span class="text-sm" [class]="percentClass()">{{ Math.round(progress()) }}%</span>
     </div>
   }
-  <div 
-    class="w-full bg-gray-200 rounded-full overflow-hidden"
-    [class]="containerClass()"
-  >
-    <div 
+  <div class="w-full bg-gray-200 rounded-full overflow-hidden" [class]="containerClass()">
+    <div
       class="h-full transition-all duration-300 ease-out"
       [class]="barClass()"
       [style.width.%]="progress()"

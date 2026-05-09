@@ -3,26 +3,35 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/home/home-page.component').then(m => m.HomePageComponent)
+    loadComponent: () =>
+      import('./pages/home/home-page.component').then((m) => m.HomePageComponent),
   },
   {
     path: 'search',
-    loadComponent: () => import('./pages/search/search-page.component').then(m => m.SearchPageComponent)
+    loadComponent: () =>
+      import('./pages/search/search-page.component').then((m) => m.SearchPageComponent),
   },
   {
     path: 'works/:id',
-    loadComponent: () => import('./pages/book/book-page.component').then(m => m.BookPageComponent)
+    loadComponent: () =>
+      import('./pages/book/book-page.component').then((m) => m.BookPageComponent),
   },
   {
     path: 'downloads',
-    loadComponent: () => import('./pages/downloads/downloads-page.component').then(m => m.DownloadsPageComponent)
+    loadComponent: () =>
+      import('./pages/downloads/downloads-page.component').then((m) => m.DownloadsPageComponent),
+  },
+  {
+    path: 'lista-usuario',
+    loadComponent: () => import('./pages/user-list/user-list-page').then((m) => m.UserList),
   },
   {
     path: 'profile',
-    loadComponent: () => import('./pages/profile/profile-page.component').then(m => m.ProfilePageComponent)
+    loadComponent: () =>
+      import('./pages/profile/profile-page.component').then((m) => m.ProfilePageComponent),
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];

@@ -1,14 +1,8 @@
 import { Injectable, signal } from '@angular/core';
-
-export interface Toast {
-  id: string;
-  message: string;
-  type: 'success' | 'error' | 'warning' | 'info';
-  duration?: number;
-}
+import { Toast } from '../models/toast.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ToastService {
   private readonly _toasts = signal<Toast[]>([]);
@@ -16,14 +10,22 @@ export class ToastService {
   readonly toasts = this._toasts.asReadonly();
 
   show(message: string, type: Toast['type'] = 'info', duration: number = 3000): void {
+    const base = 'bg-white border';
+    const colors: Record<string, string> = {
+      error: 'border-red-200',
+      info: 'border-blue-200',
+      warning: 'border-yellow-200',
+      success: 'border-green-200',
+    };
     const toast: Toast = {
-      id: crypto.randomUUID(),
-      message,
       type,
-      duration
+      message,
+      duration,
+      id: crypto.randomUUID(),
+      class: `${base} ${colors[type] || colors['info']}`,
     };
 
-    this._toasts.update(list => [...list, toast]);
+    this._toasts.update((list) => [...list, toast]);
 
     if (duration > 0) {
       setTimeout(() => this.remove(toast.id), duration);
@@ -47,7 +49,7 @@ export class ToastService {
   }
 
   remove(id: string): void {
-    this._toasts.update(list => list.filter(t => t.id !== id));
+    this._toasts.update((list) => list.filter((t) => t.id !== id));
   }
 
   clear(): void {

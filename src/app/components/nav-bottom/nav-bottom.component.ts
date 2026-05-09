@@ -4,12 +4,11 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-nav-bottom',
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './nav-bottom.component.html',
+  selector: 'nav-bottom',
   styleUrl: './nav-bottom.component.css',
+  templateUrl: './nav-bottom.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, RouterModule, TranslateModule],
 })
 export class NavBottomComponent {
   readonly activeRoute = input('');

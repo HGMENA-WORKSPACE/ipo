@@ -1,38 +1,55 @@
-import { Injectable, signal, effect } from '@angular/core';
-import { User, DEFAULT_USER } from '../models';
+import { effect, inject, Injectable, linkedSignal, signal } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../environments/environments';
+import { User } from '../models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  private readonly STORAGE_KEY = 'librivox_user';
-
-  private readonly _currentUser = signal<User>(DEFAULT_USER);
-  private readonly _preferredLanguage = signal<'es' | 'en'>('es');
-
-  readonly currentUser = this._currentUser.asReadonly();
-  readonly preferredLanguage = this._preferredLanguage.asReadonly();
+  private readonly translateService = inject(TranslateService);
+  //
+  private readonly STORAGE_KEY = environment.storage.storageKey;
+  //
+  private readonly _preferredLanguage = signal(environment.defaultLanguaje);
+  private readonly _currentUser = signal<User>(environment.defaultUser as User);
+  private readonly _availableLanguages = signal(
+    Object.entries(environment.languajes).map(([key, code]) => ({
+      label: key,
+      code,
+    })),
+  );
+  protected readonly _currentLang = linkedSignal(
+    () =>
+      this.availableLanguages().find((lang) => lang.code === this._preferredLanguage()) ||
+      this.availableLanguages()[0],
+  );
+  //
+  public readonly currentUser = this._currentUser.asReadonly();
+  public readonly currentLang = this._currentLang.asReadonly();
+  public readonly preferredLanguage = this._preferredLanguage.asReadonly();
+  public readonly availableLanguages = this._availableLanguages.asReadonly();
 
   constructor() {
     this.loadFromStorage();
 
     effect(() => {
       const user = this._currentUser();
-      if (typeof localStorage !== 'undefined') {
-        localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
-      }
+      if (typeof localStorage === 'undefined') return;
+      this.translateService.use(this._preferredLanguage());
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(user));
     });
   }
 
   setLanguage(lang: 'es' | 'en'): void {
     this._preferredLanguage.set(lang);
-    this._currentUser.update(user => ({ ...user, preferredLanguage: lang }));
+    this._currentUser.update((user) => ({ ...user, preferredLanguage: lang }));
   }
 
   updateReadingPosition(bookId: string, position: number): void {
-    this._currentUser.update(user => ({
+    this._currentUser.update((user) => ({
       ...user,
-      readingPosition: { ...user.readingPosition, [bookId]: position }
+      readingPosition: { ...user.readingPosition, [bookId]: position },
     }));
   }
 
@@ -41,7 +58,7 @@ export class UserService {
   }
 
   addFavorite(bookId: string): void {
-    this._currentUser.update(user => {
+    this._currentUser.update((user) => {
       if (user.favorites.includes(bookId)) {
         return user;
       }
@@ -50,9 +67,9 @@ export class UserService {
   }
 
   removeFavorite(bookId: string): void {
-    this._currentUser.update(user => ({
+    this._currentUser.update((user) => ({
       ...user,
-      favorites: user.favorites.filter(id => id !== bookId)
+      favorites: user.favorites.filter((id) => id !== bookId),
     }));
   }
 
@@ -68,13 +85,13 @@ export class UserService {
       try {
         const parsed = JSON.parse(stored);
         this._currentUser.set({
-          ...DEFAULT_USER,
+          ...environment.defaultUser,
           ...parsed,
-          createdAt: new Date(parsed.createdAt)
+          createdAt: new Date(parsed.createdAt),
         });
         this._preferredLanguage.set(parsed.preferredLanguage || 'es');
       } catch {
-        this._currentUser.set(DEFAULT_USER);
+        this._currentUser.set(environment.defaultUser as User);
       }
     }
   }

@@ -1,5 +1,5 @@
-import { Component, input, output, signal, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 export interface PlayerState {
@@ -12,45 +12,44 @@ export interface PlayerState {
 }
 
 @Component({
-  selector: 'app-player',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'player',
+  styleUrl: './player.component.css',
   templateUrl: './player.component.html',
-  styleUrl: './player.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, FormsModule],
 })
 export class PlayerComponent {
   readonly title = input('');
   readonly author = input('');
   readonly coverUrl = input('');
-  
+  //
+  readonly onEnded = output<void>();
+  readonly onTimeUpdate = output<number>();
+  readonly onPlayStateChange = output<boolean>();
+  //
   private readonly _playing = signal(false);
   private readonly _currentTime = signal(0);
   private readonly _duration = signal(0);
   private readonly _volume = signal(1);
   private readonly _playbackRate = signal(1);
   private readonly _muted = signal(false);
-
-  readonly playing = this._playing.asReadonly();
-  readonly currentTime = this._currentTime.asReadonly();
-  readonly duration = this._duration.asReadonly();
-  readonly volume = this._volume.asReadonly();
-  readonly playbackRate = this._playbackRate.asReadonly();
+  //
   readonly muted = this._muted.asReadonly();
-
-  readonly onPlayStateChange = output<boolean>();
-  readonly onTimeUpdate = output<number>();
-  readonly onEnded = output<void>();
-
+  readonly volume = this._volume.asReadonly();
+  readonly playing = this._playing.asReadonly();
+  readonly duration = this._duration.asReadonly();
+  readonly currentTime = this._currentTime.asReadonly();
+  readonly playbackRate = this._playbackRate.asReadonly();
+  //
   protected readonly rates = [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
   togglePlay(): void {
-    this._playing.update(p => !p);
+    this._playing.update((p) => !p);
     this.onPlayStateChange.emit(this._playing());
   }
 
   toggleMute(): void {
-    this._muted.update(m => !m);
+    this._muted.update((m) => !m);
   }
 
   skip(seconds: number): void {

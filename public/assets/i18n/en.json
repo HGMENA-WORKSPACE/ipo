@@ -2,6 +2,7 @@
   "nav": {
     "home": "Home",
     "explore": "Explore",
+    "lists": "Lists",
     "downloads": "My Downloads",
     "profile": "Profile"
   },
@@ -89,5 +90,20 @@
     "close": "Close",
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "lists": {
+    "table": {
+      "title": "Title",
+      "author": "Author",
+      "publish": "Published"
+    }
+  },
+  "profile": {
+    "preferences": "Preferences",
+    "language": "Language",
+    "statistics": "Statistics",
+    "favorites": "Favorites",
+    "progress": "In progress",
+    "userSince": "User since"
   }
 }

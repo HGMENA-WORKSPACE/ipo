@@ -1,32 +1,34 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
-  standalone: true,
-  imports: [CommonModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'modal',
+  styleUrl: './modal.component.css',
   templateUrl: './modal.component.html',
-  styleUrl: './modal.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule],
 })
 export class ModalComponent {
-  readonly isOpen = input(false);
   readonly title = input('');
-  readonly closeOnBackdrop = input(true);
+  readonly isOpen = input(false);
   readonly showActions = input(true);
+  readonly closeOnBackdrop = input(true);
   readonly size = input<'sm' | 'md' | 'lg'>('md');
-
+  //
   readonly close = output<void>();
-
-  readonly modalClass = input(() => {
+  //
+  protected readonly modalClass = computed(() => {
     const sizes: Record<string, string> = {
       sm: 'w-full max-w-md',
       md: 'w-full max-w-lg',
-      lg: 'w-full max-w-2xl'
+      lg: 'w-full max-w-2xl',
     };
     return sizes[this.size()];
   });
-
+  /**
+   *
+   * @returns
+   */
   onBackdropClick(): boolean {
     return this.closeOnBackdrop();
   }

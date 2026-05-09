@@ -1,38 +1,45 @@
-import { Component, signal, inject, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ProgressComponent } from '../../components/progress/progress.component';
-import { ConfirmDialogComponent } from '../../components/modal/confirm-dialog.component';
-import { DownloadService, ToastService } from '../../services';
-import { Download } from '../../models';
 import { TranslateModule } from '@ngx-translate/core';
+import { ConfirmDialogComponent, DownloadProgressComponent } from '../../components';
+import { Download } from '../../models';
+import { DownloadService, ToastService } from '../../services';
 
 @Component({
-  selector: 'app-downloads-page',
-  standalone: true,
-  imports: [CommonModule, RouterModule, ProgressComponent, ConfirmDialogComponent, TranslateModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'downloads-page',
+  styleUrl: './downloads-page.component.css',
   templateUrl: './downloads-page.component.html',
-  styleUrl: './downloads-page.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    CommonModule,
+    RouterModule,
+    TranslateModule,
+    ConfirmDialogComponent,
+    DownloadProgressComponent,
+  ],
 })
 export class DownloadsPageComponent {
-  private downloadService = inject(DownloadService);
-  private toastService = inject(ToastService);
-
-  activeTab = signal<'in_progress' | 'completed'>('in_progress');
-  showCancelConfirm = signal(false);
-  downloadToCancel = signal<Download | null>(null);
-
-  inProgress = this.downloadService.inProgress;
-  completed = this.downloadService.completed;
-
+  private readonly toastService = inject(ToastService);
+  private readonly downloadService = inject(DownloadService);
+  //
+  protected readonly showCancelConfirm = signal(false);
+  protected readonly downloadToCancel = signal<Download | null>(null);
+  protected readonly activeTab = signal<'in_progress' | 'completed'>('in_progress');
+  //
+  protected readonly completed = this.downloadService.completed;
+  protected readonly inProgress = this.downloadService.inProgress;
   readonly cancelMessage = computed(() => {
     const download = this.downloadToCancel();
     if (!download) return '';
     return `downloads.confirmCancelMessage | translate: { title: download.bookTitle, progress: Math.round(download.progress) }`;
   });
-
-  formatBytes(bytes: number): string {
+  /**
+   *
+   * @param bytes
+   * @returns
+   */
+  protected formatBytes(bytes: number): string {
     if (bytes === 0) return '0 B';
     const k = 1024;
     const sizes = ['B', 'KB', 'MB', 'GB'];
@@ -40,20 +47,20 @@ export class DownloadsPageComponent {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
   }
 
-  pause(id: string): void {
+  protected pause(id: string): void {
     this.downloadService.pauseDownload(id);
   }
 
-  resume(id: string): void {
+  protected resume(id: string): void {
     this.downloadService.resumeDownload(id);
   }
 
-  confirmCancel(download: Download): void {
+  protected confirmCancel(download: Download): void {
     this.downloadToCancel.set(download);
     this.showCancelConfirm.set(true);
   }
 
-  cancelDownload(): void {
+  protected cancelDownload(): void {
     const download = this.downloadToCancel();
     if (download) {
       this.downloadService.cancelDownload(download.id);
@@ -63,12 +70,12 @@ export class DownloadsPageComponent {
     this.downloadToCancel.set(null);
   }
 
-  deleteDownload(id: string): void {
+  protected deleteDownload(id: string): void {
     this.downloadService.deleteDownload(id);
     this.toastService.success('Descarga eliminada');
   }
 
-  openDownload(download: Download): void {
+  protected openDownload(download: Download): void {
     this.toastService.info('Abriendo archivo...');
   }
 

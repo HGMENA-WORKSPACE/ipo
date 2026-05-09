@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProgressComponent } from './progress.component';
+import { DownloadProgressComponent } from './download-progress.component';
 
-describe('ProgressComponent', () => {
-  let component: ProgressComponent;
-  let fixture: ComponentFixture<ProgressComponent>;
+describe('DownloadProgressComponent', () => {
+  let component: DownloadProgressComponent;
+  let fixture: ComponentFixture<DownloadProgressComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProgressComponent]
+      imports: [DownloadProgressComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ProgressComponent);
+    fixture = TestBed.createComponent(DownloadProgressComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

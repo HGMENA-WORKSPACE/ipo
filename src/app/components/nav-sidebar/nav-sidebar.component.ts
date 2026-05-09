@@ -1,14 +1,13 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-nav-sidebar',
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'nav-sidebar',
+  styleUrl: './nav-sidebar.component.css',
   templateUrl: './nav-sidebar.component.html',
-  styleUrl: './nav-sidebar.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, RouterModule, TranslatePipe],
 })
 export class NavSidebarComponent {}

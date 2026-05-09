@@ -2,7 +2,7 @@
   "nav": {
     "home": "Inicio",
     "explore": "Explorar",
-    "downloads": "Mis Descargas",
+    "lists": "Listas",
     "profile": "Perfil"
   },
   "search": {
@@ -89,5 +89,20 @@
     "close": "Cerrar",
     "confirm": "Confirmar",
     "cancel": "Cancelar"
+  },
+  "lists": {
+    "table": {
+      "title": "Título",
+      "author": "Autor",
+      "publish": "Publicado"
+    }
+  },
+  "profile": {
+    "preferences": "Preferencias",
+    "language": "Idioma",
+    "statistics": "Estadísticas",
+    "favorites": "Favoritos",
+    "progress": "En progreso",
+    "userSince": "Usuario desde"
   }
 }

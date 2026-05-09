@@ -1,35 +1,22 @@
-import { Component, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { ModalComponent } from './modal.component';
 
 @Component({
-  selector: 'app-confirm-dialog',
-  standalone: true,
-  imports: [CommonModule, ModalComponent],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'confirm-dialog',
+  styleUrl: './confirm-dialog.component.css',
   templateUrl: './confirm-dialog.component.html',
-  styleUrl: './confirm-dialog.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, ModalComponent],
 })
 export class ConfirmDialogComponent {
-  readonly isOpen = input(false);
   readonly title = input('');
   readonly message = input('');
-  readonly confirmText = input('Confirmar');
-  readonly cancelText = input('Cancelar');
+  readonly isOpen = input(false);
   readonly defaultConfirm = input(true);
-
+  readonly cancelText = input('Cancelar');
+  readonly confirmText = input('Confirmar');
+  //
   readonly confirm = output<void>();
   readonly cancel = output<void>();
-
-  onClose(): void {
-    this.cancel.emit();
-  }
-
-  onCancel(): void {
-    this.cancel.emit();
-  }
-
-  onConfirm(): void {
-    this.confirm.emit();
-  }
 }

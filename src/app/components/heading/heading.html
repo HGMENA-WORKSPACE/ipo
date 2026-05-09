@@ -1,0 +1,34 @@
+<header class="bg-white border-b sticky top-0 z-30">
+  <div class="max-w-7xl mx-auto px-4 py-4 md:px-6 lg:px-8">
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center gap-3">
+        @if (showRouterLink()) {
+          <a
+            aria-label="Volver"
+            class="p-2 -ml-2 text-gray-600 hover:text-indigo-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+            (click)="navigate()"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </a>
+        }
+        <h1 class="text-2xl font-bold text-indigo-600">{{ title() }}</h1>
+      </div>
+      <lang-selector />
+    </div>
+    <!--  -->
+    @if (showSearchInput()) {
+      <search-input
+        [voiceEnabled]="true"
+        [placeholder]="'search.placeholder' | translate"
+        (search)="onSearch($event)"
+      />
+    }
+  </div>
+</header>

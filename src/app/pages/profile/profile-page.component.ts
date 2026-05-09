@@ -1,24 +1,24 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { UserService } from '../../services';
 import { TranslateModule } from '@ngx-translate/core';
+import { Heading, LangSelector } from '../../components';
+import { UserService } from '../../services';
 
 @Component({
-  selector: 'app-profile-page',
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'profile-page',
+  styleUrl: './profile-page.component.css',
   templateUrl: './profile-page.component.html',
-  styleUrl: './profile-page.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [Heading, CommonModule, RouterModule, TranslateModule, LangSelector],
 })
 export class ProfilePageComponent {
-  userService = inject(UserService);
-
-  onLanguageChange(event: Event): void {
-    const lang = (event.target as HTMLSelectElement).value as 'es' | 'en';
-    this.userService.setLanguage(lang);
-  }
-
-  protected readonly Object = Object;
+  private readonly userService = inject(UserService);
+  //
+  protected readonly currentUser = this.userService.currentUser;
+  protected readonly preferredLanguage = this.userService.preferredLanguage;
+  protected readonly favorites = computed(() => this.currentUser().favorites.length);
+  protected readonly readingPosition = computed(
+    () => Object.keys(this.currentUser().readingPosition).length,
+  );
 }

@@ -1,24 +1,25 @@
-import { Component, input, output, computed, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { environment } from '../../../environments/environments';
 import { Book } from '../../models';
 
 @Component({
-  selector: 'app-card',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'card',
+  styleUrl: './card.component.css',
   templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [CommonModule, RouterModule],
 })
 export class CardComponent {
-  readonly book = input.required<Book>();
   readonly link = input<string>('');
-  
+  readonly book = input.required<Book>();
+  //
   readonly onPlay = output<MouseEvent>();
-
-  readonly coverUrl = computed(() => {
-    const coverId = this.book().cover_i;
-    return coverId ? `https://covers.openlibrary.org/b/id/${coverId}-M.jpg` : '';
-  });
+  //
+  readonly coverUrl = computed(() =>
+    !!this.book()?.cover_i
+      ? `${environment.services.openlibrary.coversUrl}/b/id/${this.book()!.cover_i}-M.jpg`
+      : '',
+  );
 }
