@@ -95,7 +95,10 @@
       "title": "Título",
       "author": "Autor",
       "publish": "Publicado"
-    }
+    },
+    "currently": "Empezado",
+    "want": "Añadidos",
+    "already": "Terminados"
   },
   "profile": {
     "preferences": "Preferencias",

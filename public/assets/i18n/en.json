@@ -96,7 +96,10 @@
       "title": "Title",
       "author": "Author",
       "publish": "Published"
-    }
+    },
+    "currently": "Started",
+    "want": "Additions",
+    "already": "Finished"
   },
   "profile": {
     "preferences": "Preferences",

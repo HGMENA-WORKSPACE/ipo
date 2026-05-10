@@ -27,9 +27,9 @@ export class UserList {
   //
   protected readonly tabs = computed(() =>
     [
-      { id: 'currently', label: 'Currently' },
-      { id: 'want', label: 'Want' },
-      { id: 'already', label: 'Already' },
+      { id: 'currently', label: 'lists.currently' },
+      { id: 'want', label: 'lists.want' },
+      { id: 'already', label: 'lists.already' },
     ].map((tab) => ({ ...tab, active: tab.id === this.activeTab() })),
   );
   //
